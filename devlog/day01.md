@@ -140,3 +140,21 @@ sky-take-out：maven父工程，统一管理依赖版本，聚合其他子模块
 sky-common：子模块，存放公共类，如工具类，常量类，异常类  
 sky-pojo：子模块，存放实体类，如VO、DTO等  
 sky-server：子模块，后端服务，存放配置文件、Controller、Service、Mapper等
+
+### 数据库环境搭建
+
+进入mariadb，执行：
+
+```sql
+source path/sky.sql
+```
+
+导入成功后，为该数据库创建专用用户并授权：
+
+```sql
+CREATE USER 'sky_user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON sky_take_out.* TO 'sky_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+连接dbeaver。启动dbeaver，创建新的连接，填写数据库名称，username及password，测试连接，下载驱动，完成。
