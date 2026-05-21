@@ -158,3 +158,22 @@ FLUSH PRIVILEGES;
 ```
 
 连接dbeaver。启动dbeaver，创建新的连接，填写数据库名称，username及password，测试连接，下载驱动，完成。
+
+## 前后端联调
+
+前端页面-Controller-Service-Mapper-数据库
+
+- Controller：接受并封装参数，调用service方法查询数据库，封装结果并响应  
+- Service：调用mapper方法查询数据库，密码比对，返回结果
+- Mapper：调用数据库，返回结果
+
+### 后端启动
+
+#### 编译
+
+在vscode中显示Maven视图，右键sky-take-out(父工程，聚合了其他模块)，选择`run maven commands--compile`进行编译，显示`BUILD SUCCESS`表示编译成功。
+
+在sky-server模块中的resources目录下，找到application.yml文件，修改数据库连接信息。
+
+在资源管理器的sky-server模块下，右键SkyApplication.java，选择`run Java`启动后端服务。
+

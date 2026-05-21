@@ -29,3 +29,5 @@ replay_pid*
 *.iml
 *Test.java
 **/test/
+
+sky-take-out/sky-server/src/main/resources/application-dev.yml
