@@ -169,11 +169,11 @@ FLUSH PRIVILEGES;
 
 ### 后端启动
 
-#### 编译
-
-在vscode中显示Maven视图，右键sky-take-out(父工程，聚合了其他模块)，选择`run maven commands--compile`进行编译，显示`BUILD SUCCESS`表示编译成功。
-
 在sky-server模块中的resources目录下，找到application.yml文件，修改数据库连接信息。
 
-在资源管理器的sky-server模块下，右键SkyApplication.java，选择`run Java`启动后端服务。
+在根目录执行`mvn clean package`进行编译。  
+`mvn clean install`进行安装。
 
+在控制台进入sky-take-out/sky-server目录，执行`mvn spring-boot:run`启动后端服务。
+
+启动成功，访问<http://localhost>，点击登录，进入初始页面。

@@ -12,6 +12,10 @@ sudo systemctl start nginx
 
 ## 编译
 
-在vscode中显示Maven视图，右键sky-take-out(父工程，聚合了其他模块)，选择`run maven commands--compile`进行编译，显示`BUILD SUCCESS`表示编译成功。
+根目录执行：
 
-在资源管理器的sky-server模块下，右键SkyApplication.java，选择`run Java`启动后端服务。
+```bash
+mvn clean install
+cd sky-server
+mvn spring-boot:run
+```
