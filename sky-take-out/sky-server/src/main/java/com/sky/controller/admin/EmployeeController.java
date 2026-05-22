@@ -26,7 +26,7 @@ import java.util.Map;
 @Slf4j
 public class EmployeeController {
 
-    @Autowired
+    @Autowired  // 实现依赖注入，标记需要Spring 容器自动装配的依赖项
     private EmployeeService employeeService;
     @Autowired
     private JwtProperties jwtProperties;

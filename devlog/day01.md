@@ -130,6 +130,45 @@ server {
 
 访问localhost，显示正确页面。
 
+### nginx反向代理
+
+前端向nginx服务器发送请求，nginx服务器再将请求转发给后端tomcat。  
+
+#### 优势
+
+- 隐藏后端服务器真实地址，保证后端服务安全
+- 负载均衡，将请求分配给不同的后端服务器
+- 缓存静态资源，提高访问速度
+
+#### 配置方法
+
+在文件nginx.conf中添加如下配置：
+
+```conf
+server {
+    listen 80;
+    server_name localhost;
+    
+    location /api/ {
+        proxy_pass http://localhost:8080/admin/; # 反向代理
+    }
+}
+```
+
+```conf
+upstream webservers {
+    server 192.168.100.128:8080;
+    server 192.168.100.129:8080;
+}
+server {
+    listen 8080;
+    server_name localhost;
+
+    location /api/ {
+        proxy_pass http://webservers/admin/; # 负载均衡
+    }
+}
+
 ## 后端环境搭建
 
 后端工程基于maven进行项目构建。
@@ -177,3 +216,4 @@ FLUSH PRIVILEGES;
 在控制台进入sky-take-out/sky-server目录，执行`mvn spring-boot:run`启动后端服务。
 
 启动成功，访问<http://localhost>，点击登录，进入初始页面。
+
