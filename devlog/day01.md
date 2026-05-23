@@ -217,3 +217,32 @@ FLUSH PRIVILEGES;
 
 启动成功，访问<http://localhost>，点击登录，进入初始页面。
 
+## 导入接口文档
+
+使用apifox：<https://apifox.com/>，下载AppImage。
+
+创建两个项目。  
+将`管理端接口``用户端接口`两个json文件导入。
+
+选择导入，格式选择yapi。选择文件导入->创建新模块。
+
+## Swagger
+
+使用swagger帮助后端生成接口文档，并进行接口测试。
+
+按照规范定义接口及接口相关的信息，即可生成接口文档，及在线接口调试页面。  
+
+相比postman的优势：  
+postman在测试接口时，需要手动输入参数，并且返回结果为json格式。当参数数量过多时操作不便。
+
+swagger:<https://swagger.io/>
+
+Knife4j 是为 java MVC 框架集成swagger生成api文档的增强解决方案。  
+本项目中使用knife4j以简化操作。
+
+使用方法：  
+
+在pom.xml中导入swagger配置（maven依赖）。  
+在`sky-server/src/main/java/com/sky/config/WebMvcConfiguration.java`编写生成接口文档（指定扫描包）以及静态资源映射。  
+api文档在<localhost:8080/doc.html>访问。  
+该页面下选择调试，在请求参数中直接输入数据并发送，可查看返回。
