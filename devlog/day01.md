@@ -244,5 +244,9 @@ Knife4j 是为 java MVC 框架集成swagger生成api文档的增强解决方案�
 
 在pom.xml中导入swagger配置（maven依赖）。  
 在`sky-server/src/main/java/com/sky/config/WebMvcConfiguration.java`编写生成接口文档（指定扫描包）以及静态资源映射。  
-api文档在<http://localhost:8080/doc.html>访问。  
+api文档在<http://localhost:8080/doc.html>访问。
+
+>建议使用无痕模式访问。  
+浏览器缓存可能导致访问错误。
+
 该页面下选择调试，在请求参数中直接输入数据并发送，可查看返回。
