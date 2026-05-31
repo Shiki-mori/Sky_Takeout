@@ -55,4 +55,33 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * 新增员工
+     * @param employeeDTO
+     */
+    public void save(EmployeeDTO employeeDTO) {
+        // 将DTO对象转换为实体对象
+        Employee employee = new Employee();
+
+        // employee.setName(employeeDTO.getName());
+
+        // 使用spring提供的对象属性拷贝工具类，将DTO对象的属性值拷贝到实体对象中
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        // 设置初始密码
+        employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+
+        // 设置状态
+        employee.setStatus(StatusConstant.ENABLE);
+
+        // 设置创建时间和修改时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        // 设置创建人和修改人id
+        //TODO 后期需要修改为当前登录用户的id
+        employee.setCreateUser(10L);
+        employee.setUpdateUser(10L);
+
+        employeeMapper.insert(employee);
 }

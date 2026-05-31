@@ -45,6 +45,8 @@ Body
 
 ## 代码开发
 
+### 创建DTO
+
 设计DTO，根据新增员工接口  
 封装前端提交的数据  
 
@@ -52,3 +54,4 @@ Body
 
 在[EmployeeController.java](../sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java)中添加新增员工功能。
 
+调用employeeservice的save方法。需要先在[EmployeeService.java](../sky-take-out/sky-server/src/main/java/com/sky/service/impl/EmployeeServiceImpl.java)实现save方法。
