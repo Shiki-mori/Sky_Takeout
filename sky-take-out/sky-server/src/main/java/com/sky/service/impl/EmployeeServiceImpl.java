@@ -84,4 +84,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateUser(10L);
 
         employeeMapper.insert(employee);
+    }
 }
