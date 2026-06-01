@@ -55,3 +55,10 @@ Body
 在[EmployeeController.java](../sky-take-out/sky-server/src/main/java/com/sky/controller/admin/EmployeeController.java)中添加新增员工功能。
 
 调用employeeservice的save方法。需要先在[EmployeeService.java](../sky-take-out/sky-server/src/main/java/com/sky/service/impl/EmployeeServiceImpl.java)实现save方法。
+
+## 功能测试
+
+- 前后端联调测试
+- 接口文档测试
+
+前后端开发进度可能不同步，主要以接口文档测试为主。
