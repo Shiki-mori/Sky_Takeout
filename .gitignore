@@ -26,6 +26,7 @@ replay_pid*
 
 **/target/
 .vscode
+.idea/
 *.iml
 *Test.java
 **/test/

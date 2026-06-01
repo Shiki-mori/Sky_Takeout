@@ -88,7 +88,9 @@ Body
 
 程序存在的问题：  
 
-- 录入的用户名已存在，将抛出异常，但是没有进行处理。  
+### SQL异常未处理
+
+录入的用户名已存在，将抛出异常，但是没有进行处理。  
 异常来源：数据库对用户名的唯一约束。  
 报错信息:
 
@@ -105,6 +107,26 @@ Body
   java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'zhangsan' for key 'idx_username'
   ```
 
-- 新增员工时，创建人id和修改人id设为固定值10L。TODO：修改为当前登录用户id。
+使用全局异常处理器捕获异常。  
+从报错日志中获取异常类型及其报错信息。
 
-使用全局异常处理器捕获异常
+### 获取登录用户id
+
+新增员工时，创建人id和修改人id设为固定值10L。TODO：修改为当前登录用户id。
+
+实现思路：  
+通过JWT令牌反向解析获取当前登录用户id。
+
+解析出id后，如何传递给service层的save方法？
+
+>ThreadLocal是Thread的局部变量。  
+ThreadLocal为每个线程创建一个副本，每个线程的副本互不干扰。只有一个线程能修改自己的副本，其他线程的副本值不变。外部无法访问。  
+客户端发起的每一次请求，tomcat服务器都为其分配一个线程。  
+因此可以将当前登录用户id保存在ThreadLocal中。不会被其他请求线程所干扰。同时可在该请求的service调用中使用。  
+
+>TheadLocal常用方法  
+- public void set(T value)  设置当前线程的局部变量的值
+- public T get()  获取当前线程的线程局部变量值
+- public void remove()  删除当前线程的线程局部变量
+
+创建一个ThreadLocal变量，保存当前登录用户id。
