@@ -62,3 +62,24 @@ Body
 - 接口文档测试
 
 前后端开发进度可能不同步，主要以接口文档测试为主。
+
+启动后端，访问<http://localhost:8080/doc.html>，点击新增员工，选择调试，填充请求参数：
+
+```json
+{
+  "id": 0,
+  "idNumber": "111111222233334444",
+  "name": "张三",
+  "phone": "11122223333",
+  "sex": "1",
+  "username": "zhangsan"
+}
+```
+
+发送。由于缺少令牌，不能通过jwt验证，返回401错误。  
+将在接口文档中统一加入一个令牌，方便后续调试。
+
+从员工登录功能发送请求，获取一个返回的令牌token。
+
+全局参数设置--添加参数。设置参数名称为token，参数类型为header，参数值为返回的令牌。  
+> token的名称在[application.yml](../sky-take-out/sky-server/src/main/resources/application.yml)中配置。
