@@ -198,8 +198,21 @@ pagequery调用service层的pageQuery方法。
 
 pageQuery使用mybatis--[pagehelper](../sky-take-out/pom.xml:67)插件实现分页查询。
 
-
-
 ## 功能测试
 
+### 通过接口文档测试
+
+jwt令牌过期，将其有效期延长：[令牌](../sky-take-out/sky-server/src/main/resources/application.yml):39
+
+从员工登录功能获取新的token，将其设为全局请求参数。
+
+### 前后端联调测试
+
 ## 代码完善
+
+经过测试发现，后端返回前端的数据中，日期格式为`"createTime": "2026-06-01T17:39:48",
+"updateTime": "2026-06-01T17:39:48"`，需要将其转换为年月日格式。
+
+- 方式1: 在属性上加入注解`@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")`，对日期进行格式化。
+- 方式2: 在WebMvcConfiguration中扩展Spring MVC的消息转换器，统一对日期类型格式化处理。
+
