@@ -216,3 +216,49 @@ jwt令牌过期，将其有效期延长：[令牌](../sky-take-out/sky-server/sr
 - 方式1: 在属性上加入注解`@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")`，对日期进行格式化。
 - 方式2: 在WebMvcConfiguration中扩展Spring MVC的消息转换器，统一对日期类型格式化处理。
 
+# 启用禁用员工账号
+
+## 需求分析和设计
+
+### 业务规则
+
+- 可对状态为“禁用”的员工账号进行“启用”操作
+- 可对状态为“启用”的员工账号进行“禁用”操作
+- 状态为“禁用”的员工账号，不允许登录系统
+
+### 接口设计
+
+path：/admin/employee/status/{status}
+method: POST
+请求参数：
+
+headers：
+
+| 参数名称         | 是否必须 | 示例               | 描述 |
+|--------------|------|------------------|----|
+| Content-type | 是    | application/json |    | 
+
+路径参数：
+
+| 参数名称   | 示例  | 描述    |
+|--------|-----|-------|
+| status | 1,0 | 启用,禁用 |
+| id     | 1   | 员工id  |
+
+返回数据：
+
+| 名称   | 类型     | 是否必须 | 其他信息 |
+|------|--------|------|------|
+| code | number |      |      |
+| msg  | string | 否    |      |
+| data | string |      |      |
+
+## 代码开发
+
+先在controller中新增方法`startOrStop`，标注请求方法、路径和接口说明 。  
+该方法调用service层（employeeService）的startOrStop方法。在service中新增方法`startOrStop`，实现员工账号的启用禁用。  
+跳转到其实现类`EmployeeServiceImpl`，编写方法`startOrStop`。具体的实现通过sql语句，需要调用mapper层中对应的update方法。  
+在`EmployeeMapper`中编写update方法。  
+由于是动态sql，不使用注解，而是使用xml文件。在xml中编写sql动态语句。
+
+## 功能测试
